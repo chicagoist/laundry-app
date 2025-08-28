@@ -1,4 +1,35 @@
 package com.github.chicagoist.laundryapp.app
 
-class Main {
+import com.github.chicagoist.laundryapp.model.Machine
+import com.github.chicagoist.laundryapp.model.MachineType
+import com.github.chicagoist.laundryapp.model.User
+import com.github.chicagoist.laundryapp.service.QueueManager
+
+
+fun main() {
+    println("Введите данные стиральной машины:")
+
+    print("Название: ")
+    val name = readln()
+
+    print("ID: ")
+    val id = readln()
+
+    print("Тип (например, Washer): ")
+    val type = readln()
+
+    print("Статус (например, Свободна): ")
+    val status = readln()
+
+    // Используем многострочную строку и шаблоны для вывода
+    println(
+        """
+        |--- Данные машины ---
+        |Название: $name
+        |ID: $id
+        |Тип: $type
+        |Статус: $status
+        |---------------------
+        """.trimMargin()
+    )
 }
