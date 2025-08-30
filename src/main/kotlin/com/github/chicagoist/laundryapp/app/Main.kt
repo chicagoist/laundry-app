@@ -13,13 +13,16 @@ fun main() {
     val name = readln()
 
     print("ID: ")
-    val id = readln()
+    val id = readln().toIntOrNull() ?: 0
 
     print("Тип (например, Washer): ")
     val type = readln()
 
     print("Статус (например, Свободна): ")
     val status = readln()
+
+    print("Время стирки в минутах: ")
+    val worktime = readln().toIntOrNull() ?: 30
 
     // Используем многострочную строку и шаблоны для вывода
     println(
@@ -29,6 +32,7 @@ fun main() {
         |ID: $id
         |Тип: $type
         |Статус: $status
+        |Время работы: $worktime
         |---------------------
         """.trimMargin()
     )
