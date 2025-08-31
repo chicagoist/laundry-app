@@ -1,43 +1,37 @@
 package com.github.chicagoist.laundryapp.app
 
-import com.github.chicagoist.laundryapp.model.Machine
-import com.github.chicagoist.laundryapp.model.MachineType
-import com.github.chicagoist.laundryapp.model.User
-import com.github.chicagoist.laundryapp.service.QueueManager
 import com.github.chicagoist.laundryapp.util.formatTime
 
-
 fun main() {
-    println("Введите данные стиральной машины:")
+    println("Введите данные о машинке:")
 
-    print("Название: ")
-    val name = readln()
+    print("Машина (Washer или Dryer): ")
+    val machine = readln()
 
-    print("ID: ")
-    val id = readln().toIntOrNull()
-    if (id == null) {
-        println("Ошибка: введите число для ID!")
-        return
+    println("Выберите состояние:")
+    println("1 - working")
+    println("2 - broken")
+    println("3 - maintenance")
+
+    val status = when (readln().toIntOrNull()) {
+        1 -> "working"
+        2 -> "broken"
+        3 -> "maintenance"
+        else -> {
+            println("Ошибка: неверный ввод статуса! Программа завершена.")
+            return
+        }
     }
 
-    print("Тип (например, Washer): ")
-    val type = readln()
+    print("Время работы в минутах: ")
+    val worktime = readln().toIntOrNull() ?: 0
 
-    print("Статус (например, Свободна): ")
-    val status = readln()
-
-    print("Время стирки в минутах: ")
-    val worktime = readln().toIntOrNull() ?: 30
-
-    // Используем многострочную строку и шаблоны для вывода
     println(
         """
         |--- Данные машины ---
-        |Название: $name
-        |ID: $id
-        |Тип: $type
-        |Статус: $status
-        |Время работы: ${formatTime(worktime * 60)}
+        |Машина: $machine
+        |Состояние: $status
+        |Время работы: ${formatTime(worktime)}
         |---------------------
         """.trimMargin()
     )
