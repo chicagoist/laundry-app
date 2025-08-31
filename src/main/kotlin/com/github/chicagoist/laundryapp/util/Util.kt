@@ -2,7 +2,7 @@ package com.github.chicagoist.laundryapp.util
 
 fun formatTime(totalSeconds: Int) : String {
 
-    if (totalSeconds < 0) return "00:00"
+    if (totalSeconds < 0) return "00:00:00"
 
     val hours = totalSeconds / 3600
     val secondsForMinutes = totalSeconds % 3600
@@ -13,7 +13,5 @@ fun formatTime(totalSeconds: Int) : String {
     val minutesFormatted = minutes.toString().padStart(2, '0')
     val secondsFormatted = seconds.toString().padStart(2, '0')
 
-    val countdown : String = "${hoursFormatted}:${minutesFormatted}:${secondsFormatted}"
-
-    return countdown
+    return "$hoursFormatted:$minutesFormatted:$secondsFormatted"
 }

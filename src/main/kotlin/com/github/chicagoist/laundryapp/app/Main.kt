@@ -14,7 +14,11 @@ fun main() {
     val name = readln()
 
     print("ID: ")
-    val id = readln().toIntOrNull() ?: 0
+    val id = readln().toIntOrNull()
+    if (id == null) {
+        println("Ошибка: введите число для ID!")
+        return
+    }
 
     print("Тип (например, Washer): ")
     val type = readln()
