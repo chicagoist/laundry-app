@@ -15,5 +15,7 @@ fun formatTime(totalSeconds: Int) : String {
 
     val countdown : String = "${hoursFormatted}:${minutesFormatted}:${secondsFormatted}"
 
+    println(countdown)
+
     return countdown
 }
