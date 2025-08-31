@@ -41,6 +41,4 @@ fun main() {
         |---------------------
         """.trimMargin()
     )
-
-    formatTime(600)
 }
