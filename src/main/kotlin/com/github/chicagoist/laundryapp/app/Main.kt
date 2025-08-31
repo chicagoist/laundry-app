@@ -4,6 +4,7 @@ import com.github.chicagoist.laundryapp.model.Machine
 import com.github.chicagoist.laundryapp.model.MachineType
 import com.github.chicagoist.laundryapp.model.User
 import com.github.chicagoist.laundryapp.service.QueueManager
+import com.github.chicagoist.laundryapp.util.formatTime
 
 
 fun main() {
@@ -32,8 +33,10 @@ fun main() {
         |ID: $id
         |Тип: $type
         |Статус: $status
-        |Время работы: $worktime
+        |Время работы: ${formatTime(worktime * 60)}
         |---------------------
         """.trimMargin()
     )
+
+    formatTime(600)
 }
