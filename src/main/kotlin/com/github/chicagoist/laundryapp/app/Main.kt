@@ -18,34 +18,21 @@ fun main() {
     println("3 - maintenance")
 
     val choice = readln().toIntOrNull()
-    if (choice == null || choice !in 1..3) {
-        println("Ошибка: введите цифру 1, 2 или 3!")
-        return
+    // Secure-first: если ввод не число ИЛИ число не 1 -> ОШИБКА
+    if (choice == null || choice != 1) {
+        println("Ошибка: машина должна быть в состоянии 'working'!")
+        return // Немедленное завершение
     }
-
-    val status = when (choice) {
-        1 -> "working"
-        2 -> "broken"
-        3 -> "maintenance"
-        else -> {
-            println("Ошибка: неверный ввод статуса! Программа завершена.")
-            return
-        }
-    }
-
-    if (choice == 2 || choice == 3) {
-        println("Ошибка: машина не может быть в этом состоянии!")
-    }
-
+    val status = "working" // Присваиваем единственное допустимое значение
 
 
     print("Время работы в минутах: ")
     val worktime = readln().toIntOrNull() ?: 0
     if (worktime <= 0) {
-        println("Время должно быть > 0!")
+        println("Ошибка: время должно быть положительным числом!")
         return
     } else if (worktime > 180) {
-        println("Время превышает 3 часа")
+        println("Предупреждение: время работы превышает 3 часа")
     }
 
     println(
