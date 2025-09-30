@@ -3,11 +3,12 @@ package com.github.chicagoist.laundryapp.app
 import com.github.chicagoist.laundryapp.util.formatTime
 
 fun main() {
-    println("Введите данные о машинке:")
+    val status: String
 
-    print("Машина (Washer или Dryer): ")
-    val machine = readln()
-    if (machine != "Washer" && machine != "Dryer") {
+    print("Введите данные о машинке. Машина (Washer или Dryer): ")
+    val machine = readln().lowercase()
+
+    if (machine != "washer" && machine != "dryer") {
         println("Неверное название машины")
         return
     }
@@ -22,17 +23,24 @@ fun main() {
     if (choice == null || choice != 1) {
         println("Ошибка: машина должна быть в состоянии 'working'!")
         return // Немедленное завершение
+    } else {
+        status = "working" // Присваиваем единственное допустимое значение
     }
-    val status = "working" // Присваиваем единственное допустимое значение
-
 
     print("Время работы в минутах: ")
     val worktime = readln().toIntOrNull() ?: 0
+
+    // SECURE-FIRST: сначала базовая валидация
     if (worktime <= 0) {
         println("Ошибка: время должно быть положительным числом!")
         return
-    } else if (worktime > 180) {
-        println("Предупреждение: время работы превышает 3 часа")
+    }
+
+    // Проверка времени для разных типов машин
+    if (machine == "dryer" && worktime > 120) {
+        println("Предупреждение: время сушки превышает 2 часа")
+    } else if (machine == "washer" && worktime > 180) {
+        println("Предупреждение: время стирки превышает 3 часа")
     }
 
     println(
