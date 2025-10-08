@@ -2,8 +2,11 @@ package com.github.chicagoist.laundryapp.app
 
 import com.github.chicagoist.laundryapp.util.formatTime
 
+
 fun main() {
     val status: String
+    var washerUsageCount = 0
+    var dryerUsageCount = 0
 
     print("Введите данные о машинке. Машина (Washer или Dryer): ")
     val machine = readln().lowercase()
@@ -19,18 +22,21 @@ fun main() {
     println("3 - maintenance")
 
     val choice = readln().toIntOrNull()
-    // Secure-first: если ввод не число ИЛИ число не 1 -> ОШИБКА
     if (choice == null || choice != 1) {
         println("Ошибка: машина должна быть в состоянии 'working'!")
-        return // Немедленное завершение
+        return
     } else {
-        status = "working" // Присваиваем единственное допустимое значение
+        status = "working"
     }
 
     print("Время работы в минутах: ")
-    val worktime = readln().toIntOrNull() ?: 0
+    val worktime = readln().toIntOrNull()
 
-    // SECURE-FIRST: сначала базовая валидация
+    // STRICT SECURE-FIRST: проверка на null и положительное значение
+    if (worktime == null) {
+        println("Ошибка: введите число!")
+        return
+    }
     if (worktime <= 0) {
         println("Ошибка: время должно быть положительным числом!")
         return
@@ -43,12 +49,20 @@ fun main() {
         println("Предупреждение: время стирки превышает 3 часа")
     }
 
+    // Увеличение счётчика только после успешной валидации
+    if (machine == "washer") {
+        washerUsageCount += 1
+    } else {
+        dryerUsageCount += 1
+    }
+
     println(
         """
         |--- Данные машины ---
         |Машина: $machine
         |Состояние: $status
         |Время работы: ${formatTime(worktime)}
+        |Количество использований: ${if (machine == "washer") washerUsageCount else dryerUsageCount}
         |---------------------
         """.trimMargin()
     )
